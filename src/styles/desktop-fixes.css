@@ -1,0 +1,195 @@
+/* src/styles/desktop-fixes.css */
+/* ✅ DESKTOP LAYOUT FIXES - Corregge media queries problematiche */
+
+/* =================== DESKTOP OVERRIDES =================== */
+
+/* Desktop breakpoint: 821px+ (sopra mobile detection) */
+@media (min-width: 821px) {
+  
+  /* ✅ FORZA FOOTER VISIBILE su desktop */
+  .site-footer {
+    display: block !important;
+    position: relative;
+    background: #0f1419;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #94a3b8;
+  }
+
+  /* ✅ NASCONDI COMPONENTI MOBILE su desktop */
+  .mobile-bottom-bar,
+  .mh-mini,
+  .mcats,
+  .mobile-header-mini,
+  .mobile-categories {
+    display: none !important;
+  }
+
+  /* ✅ MAIN CONTENT desktop - nessun padding mobile */
+  .app-main.with-mb {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: auto !important;
+    transform: none !important;
+    -webkit-overflow-scrolling: auto !important;
+    scroll-behavior: auto !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  /* ✅ DESKTOP HEADER LAYOUT */
+  .app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .app-main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+  }
+
+  /* ✅ LIVE PAGE desktop layout - corregge media query problematiche */
+  .live-main-layout {
+    flex-direction: row !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+
+  .live-sidebar {
+    width: 400px !important;
+    height: 100vh !important;
+    border-left: 1px solid #e5e7eb !important;
+    border-top: none !important;
+  }
+
+  .live-video-player {
+    min-height: 100vh !important;
+    flex: 1;
+  }
+
+  .seller-profile-overlay {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 50 !important;
+  }
+
+  .control-panel-content {
+    flex-direction: row !important;
+    gap: 16px !important;
+  }
+
+  /* ✅ SELLER BUTTONS desktop sizing */
+  .seller-btn {
+    padding: 16px 24px !important;
+    font-size: 16px !important;
+    min-height: 52px !important;
+    gap: 12px !important;
+    border-radius: 16px !important;
+    touch-action: auto !important;
+  }
+  
+  .btn-text {
+    font-size: 15px !important;
+    display: inline !important;
+    letter-spacing: 0 !important;
+  }
+  
+  .btn-icon {
+    font-size: 20px !important;
+    flex-shrink: 0;
+  }
+
+  /* ✅ LIVE BADGES desktop positioning */
+  .live-badge-red {
+    top: 24px !important;
+    left: 24px !important;
+    padding: 12px 20px !important;
+    font-size: 15px !important;
+    border-radius: 24px !important;
+  }
+
+  .viewers-count {
+    bottom: 24px !important;
+    left: 24px !important;
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    border-radius: 20px !important;
+  }
+
+  /* ✅ DESKTOP CHAT */
+  .mobile-chat-overlay {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  .mobile-message-item {
+    padding: 12px 16px !important;
+    border-radius: 16px !important;
+    font-size: 14px !important;
+  }
+
+  /* ✅ CURRENT BID desktop layout */
+  .current-bid-info {
+    padding: 24px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .bids-panel {
+    padding: 20px !important;
+  }
+
+  /* ✅ PRODUCT INFO desktop layout */
+  .current-product-info {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .product-image {
+    align-self: flex-start !important;
+  }
+
+  /* ✅ SELLER INFO sempre visibile su desktop */
+  .live-overlay-elements .seller-profile-overlay .seller-info {
+    display: block !important;
+  }
+
+  .live-overlay-elements .seller-profile-overlay {
+    padding: 12px !important;
+  }
+}
+
+/* =================== TABLET FIXES (821px - 1024px) =================== */
+@media (min-width: 821px) and (max-width: 1024px) {
+  
+  /* ✅ TABLET layout specifico se necessario */
+  .app-main {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .live-sidebar {
+    width: 350px !important;
+  }
+}
+
+/* =================== LARGE DESKTOP (1200px+) =================== */
+@media (min-width: 1200px) {
+  
+  .app-main {
+    max-width: 1400px;
+    padding: 32px;
+  }
+
+  .live-sidebar {
+    width: 450px !important;
+  }
+}
