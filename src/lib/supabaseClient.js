@@ -1,51 +1,58 @@
 import { createClient } from "@supabase/supabase-js";
 
-// 🔧 DOMINIO DINAMICO: production vs development
-const SITE_URL = window.location.hostname.includes('replit.dev') || window.location.hostname.includes('localhost')
-  ? window.location.origin 
-  : "https://bidli.live";
+// 🌐 URL del sito (dev + prod)
+// Ora NON forziamo più "https://bidli.live", usiamo sempre il dominio reale
+const SITE_URL = window.location.origin;
 
-console.log('🌐 Supabase configurato per dominio:', SITE_URL);
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+console.log("[BIDLI] SITE_URL:", SITE_URL);
+console.log("[BIDLI] VITE_SUPABASE_URL:", supabaseUrl);
+console.log("[BIDLI] HAS_SUPABASE_ANON_KEY:", !!supabaseAnonKey);
+
+if (!supabaseUrl) {
+  throw new Error(
+    "VITE_SUPABASE_URL non definita. Controlla le Environment Variables su Vercel (tab Production)."
+  );
+}
+
+if (!supabaseAnonKey) {
+  throw new Error(
+    "VITE_SUPABASE_ANON_KEY non definita. Controlla le Environment Variables su Vercel (tab Production)."
+  );
+}
 
 export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY,
+  supabaseUrl,
+  supabaseAnonKey,
   {
     auth: {
       autoRefreshToken: true,
       persistSession: true,
       detectSessionInUrl: true,
       siteUrl: SITE_URL,
-      redirectTo: `${SITE_URL}/auth/callback`
+      redirectTo: `${SITE_URL}/auth/callback`,
     },
     db: {
-      schema: 'public'
+      schema: "public",
     },
     global: {
       headers: {
-        'X-Site-URL': SITE_URL,
-        'Cache-Control': 'no-cache'
-      }
-    }
+        "X-Site-URL": SITE_URL,
+        "Cache-Control": "no-cache",
+      },
+    },
   }
 );
 
-// ✅ AUTO-SETUP STORAGE BUCKETS
-const REQUIRED_BUCKETS = [
-  { name: 'media', public: true },
-  { name: 'uploads', public: true }, // ✅ Aggiunto per CreatePost/CreateStory
-  { name: 'profile-pictures', public: true },
-  { name: 'store-logos', public: true }
-];
-
+// ✅ AUTO-SETUP STORAGE BUCKETS (per ora solo log, come prima)
 export async function initializeStorage() {
   try {
-    // 🔧 Skip bucket creation - assume already exists or will be created manually
-    console.log('✅ Storage bucket uploads ready (skipping auto-creation)!');
+    console.log("✅ Storage bucket uploads ready (skipping auto-creation)!");
     return true;
-    
   } catch (error) {
-    console.error('❌ Errore setup storage:', error);
+    console.error("❌ Errore setup storage:", error);
     return false;
   }
 }
