@@ -1,8 +1,13 @@
 {
-  "rewrites": [
+  "version": 2,
+  "routes": [
     {
-      "source": "/auth/callback",
-      "destination": "/"
+      "src": "^/auth/callback$",
+      "dest": "/"
+    },
+    {
+      "src": "^(?!/assets/|/api/|/favicon\\.svg|/sw\\.js).*$",
+      "dest": "/"
     }
   ]
 }
